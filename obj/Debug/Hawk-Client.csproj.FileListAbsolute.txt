@@ -1,0 +1,14 @@
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\bin\Debug\Hawk-Client.exe.config
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\bin\Debug\Hawk-Client.exe
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\bin\Debug\Hawk-Client.pdb
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\obj\Debug\Hawk-Client.csprojAssemblyReference.cache
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\obj\Debug\Hawk_Client.MainWindow.resources
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\obj\Debug\Hawk_Client.Properties.Resources.resources
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\obj\Debug\Hawk-Client.csproj.GenerateResource.cache
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\obj\Debug\Hawk-Client.csproj.CoreCompileInputs.cache
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\obj\Debug\Hawk-Client.exe
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\obj\Debug\Hawk-Client.pdb
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\bin\Debug\Renci.SshNet.dll
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\bin\Debug\Renci.SshNet.xml
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\obj\Debug\Hawk-Client.csproj.CopyComplete
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\obj\Debug\Hawk_Client.ConfigWindow.resources
