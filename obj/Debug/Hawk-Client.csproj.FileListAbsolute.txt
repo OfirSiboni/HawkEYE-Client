@@ -12,3 +12,9 @@ C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\bin\Debug\Renci.SshNet.dll
 C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\bin\Debug\Renci.SshNet.xml
 C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\obj\Debug\Hawk-Client.csproj.CopyComplete
 C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\obj\Debug\Hawk_Client.ConfigWindow.resources
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\bin\Debug\AForge.Video.dll
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\bin\Debug\AForge.dll
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\bin\Debug\AForge.Video.xml
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\bin\Debug\AForge.xml
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\bin\Debug\MjpegProcessor.dll
+C:\Users\ofirs\source\repos\Hawk-Client\Hawk-Client\bin\Debug\WindowsBase.dll

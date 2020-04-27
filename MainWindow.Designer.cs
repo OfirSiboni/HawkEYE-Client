@@ -117,7 +117,8 @@ namespace Hawk_Client {
             // 
             // mainBrowser
             // 
-            this.mainBrowser.Location = new System.Drawing.Point(869, 83);
+            this.mainBrowser.IsWebBrowserContextMenuEnabled = false;
+            this.mainBrowser.Location = new System.Drawing.Point(897, 90);
             this.mainBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.mainBrowser.Name = "mainBrowser";
             this.mainBrowser.ScrollBarsEnabled = false;
@@ -168,6 +169,7 @@ namespace Hawk_Client {
             this.reboot.TabIndex = 3;
             this.reboot.Text = "reboot";
             this.reboot.UseVisualStyleBackColor = false;
+            this.reboot.Click += new System.EventHandler(this.Reboot_Click);
             // 
             // restart
             // 
