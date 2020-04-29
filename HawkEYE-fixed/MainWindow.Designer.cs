@@ -57,7 +57,7 @@ namespace Hawk_Client {
             this.HeightBox = new System.Windows.Forms.TextBox();
             this.TeamNumberBox = new System.Windows.Forms.TextBox();
             this.GRIPselect = new System.Windows.Forms.ComboBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.MLenable = new System.Windows.Forms.CheckBox();
             this.scriptSelect = new System.Windows.Forms.ComboBox();
             this.ML = new System.Windows.Forms.TabPage();
             this.HSVtable = new System.Windows.Forms.GroupBox();
@@ -75,6 +75,7 @@ namespace Hawk_Client {
             this.Hlabel = new System.Windows.Forms.Label();
             this.startConfigButton = new System.Windows.Forms.Button();
             this.CameraControl = new System.Windows.Forms.TabPage();
+            this.Refresh = new System.Windows.Forms.Button();
             this.tabs.SuspendLayout();
             this.Control.SuspendLayout();
             this.Settings.SuspendLayout();
@@ -274,7 +275,7 @@ namespace Hawk_Client {
             this.Settings.Controls.Add(this.HeightBox);
             this.Settings.Controls.Add(this.TeamNumberBox);
             this.Settings.Controls.Add(this.GRIPselect);
-            this.Settings.Controls.Add(this.checkBox1);
+            this.Settings.Controls.Add(this.MLenable);
             this.Settings.Controls.Add(this.scriptSelect);
             this.Settings.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(250)));
             this.Settings.Location = new System.Drawing.Point(4, 22);
@@ -444,20 +445,20 @@ namespace Hawk_Client {
             this.GRIPselect.Text = "GRIP file";
             this.GRIPselect.Visible = false;
             // 
-            // checkBox1
+            // MLenable
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.checkBox1.ForeColor = System.Drawing.Color.White;
-            this.checkBox1.Location = new System.Drawing.Point(24, 73);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(82, 17);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "ML enabled";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
+            this.MLenable.AutoSize = true;
+            this.MLenable.Checked = true;
+            this.MLenable.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.MLenable.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.MLenable.ForeColor = System.Drawing.Color.White;
+            this.MLenable.Location = new System.Drawing.Point(24, 73);
+            this.MLenable.Name = "MLenable";
+            this.MLenable.Size = new System.Drawing.Size(82, 17);
+            this.MLenable.TabIndex = 2;
+            this.MLenable.Text = "ML enabled";
+            this.MLenable.UseVisualStyleBackColor = true;
+            this.MLenable.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
             // scriptSelect
             // 
@@ -640,12 +641,26 @@ namespace Hawk_Client {
             this.CameraControl.TabIndex = 3;
             this.CameraControl.Text = "Camera Control";
             // 
+            // Refresh
+            // 
+            this.Refresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(115)))), ((int)(((byte)(112)))));
+            this.Refresh.FlatAppearance.BorderSize = 0;
+            this.Refresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Refresh.Location = new System.Drawing.Point(837, 48);
+            this.Refresh.Name = "Refresh";
+            this.Refresh.Size = new System.Drawing.Size(75, 23);
+            this.Refresh.TabIndex = 5;
+            this.Refresh.Text = "Refresh";
+            this.Refresh.UseVisualStyleBackColor = false;
+            this.Refresh.Click += new System.EventHandler(this.Refresh_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(13)))), ((int)(((byte)(13)))));
             this.ClientSize = new System.Drawing.Size(1549, 582);
+            this.Controls.Add(this.Refresh);
             this.Controls.Add(this.tabs);
             this.Controls.Add(this.ConnectButton);
             this.Controls.Add(this.password);
@@ -687,7 +702,7 @@ namespace Hawk_Client {
         private System.Windows.Forms.Button reboot;
         private System.Windows.Forms.Button restart;
         private System.Windows.Forms.ComboBox scriptSelect;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox MLenable;
         private System.Windows.Forms.ComboBox GRIPselect;
         private System.Windows.Forms.TextBox HeightBox;
         private System.Windows.Forms.TextBox TeamNumberBox;
@@ -718,5 +733,6 @@ namespace Hawk_Client {
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label Hlabel;
+        private Button Refresh;
     }
 }

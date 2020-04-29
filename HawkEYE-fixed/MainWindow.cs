@@ -123,12 +123,18 @@ namespace Hawk_Client {
         #endregion
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e) {
-            bool ok = !this.checkBox1.Checked;
+            bool ok = !this.MLenable.Checked;
             this.GRIPselect.Visible = ok;
             this.gripLabel.Visible = ok;
             this.GRIPloader.Visible = ok;
             this.GRIPpushButton.Visible = ok;
             this.GRIPdeleteButton.Visible = ok;
+        }
+
+        private void Refresh_Click(object sender, EventArgs e) {
+            if(mainBrowser != null) {
+                mainBrowser.Refresh();
+            }
         }
 
         private void Button1_Click(object sender, EventArgs e) {

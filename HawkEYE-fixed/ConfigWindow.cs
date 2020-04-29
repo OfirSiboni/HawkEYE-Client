@@ -1,17 +1,23 @@
 ﻿using Renci.SshNet;
 using System;
+using System.Threading;
 using System.Windows.Forms;
+using System.Net;
+using System.Net.Sockets;
 
 namespace HawkEYE_fixed {
     public partial class ConfigWindow : Form {
         public bool prev_value, next_value, set_conf_value, add_pt_value, done_value;
         public SshClient ssh_client;
         private string address;
+        private Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+        private IPAddress broadcast;
+        private IPEndPoint ep;
         public ConfigWindow(string Address, SshClient client) {
             InitializeComponent();
             prev_value = next_value = set_conf_value = add_pt_value = done_value = false;
-
-
+            broadcast = IPAddress.Parse(Address);
+            ep = new IPEndPoint(broadcast, 5000);
             ssh_client = client;
             address = Address;
         }
@@ -52,28 +58,39 @@ namespace HawkEYE_fixed {
         }
 
         private void prev_click(object sender, EventArgs e) {
-            prev_value = true;
+            changed_values("PREV");
         }
         private void next_click(object sender, EventArgs e) {
-            next_value = true;
+            changed_values("NEX");
         }
         private void setConf_click(object sender, EventArgs e) {
-            set_conf_value = true;
+            changed_values("SET_CONF");
         }
 
 
 
         private void addPt_click(object sender, EventArgs e) {
-            add_pt_value = true;
+            changed_values("ADD_PT");
         }
         private void button_done_clicked(object sender, EventArgs e) {
+            changed_values("DONE");
             this.Close();
         }
-
-        public void changed_values() {
-            ssh_client.CreateCommand("python3 -c'import main;main.changed_vals(" + get_prev_value() + ',' + get_next_value() + ',' + get_set_conf_value() + ',' + get_add_pt_value() + ',' + get_done_value() + ')');
+        public void changed_values(string variable) {
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes(variable);
+            sock.SendTo(msg, ep);
+            /** Add ONLY if There is no other way to send False Values
+            foreach (string s in names)
+                if (s != variable){
+                    byte[] secMsg = System.Text.Encoding.ASCII.GetBytes(s);
+                    stream.Write(secMsg, 0, secMsg.Length);
+                }
+            **/
         }
-
+        public string boolToString(bool str) {
+            if (str.ToString()[0] == 'f') return "False";
+            return "True";
+        }
         public bool ischanged() {
             return get_prev_value() || get_next_value() || get_set_conf_value() || get_add_pt_value() || get_done_value();
         }
