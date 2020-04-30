@@ -13,13 +13,14 @@ namespace HawkEYE_fixed {
         private Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         private IPAddress broadcast;
         private IPEndPoint ep;
-        public ConfigWindow(string Address, SshClient client) {
+        public ConfigWindow(string Address) {
             InitializeComponent();
             prev_value = next_value = set_conf_value = add_pt_value = done_value = false;
             broadcast = IPAddress.Parse(Address);
             ep = new IPEndPoint(broadcast, 5000);
-            ssh_client = client;
             address = Address;
+            Thread noneThread = new Thread(sendNull);
+            noneThread.Start();
         }
         private bool get_prev_value() {
             if (prev_value) {
@@ -93,6 +94,11 @@ namespace HawkEYE_fixed {
         }
         public bool ischanged() {
             return get_prev_value() || get_next_value() || get_set_conf_value() || get_add_pt_value() || get_done_value();
+        }
+        byte[] nullMsg = System.Text.Encoding.ASCII.GetBytes("null");
+        public void sendNull() {
+            while(true)
+            sock.SendTo(nullMsg, ep);
         }
 
 

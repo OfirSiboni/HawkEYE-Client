@@ -139,7 +139,7 @@ namespace Hawk_Client {
 
         private void Button1_Click(object sender, EventArgs e) {
             if (!sshClient.IsConnected) { showError("You are not connected!", "invalid Action"); return; }
-            ConfigWindow w = new ConfigWindow(HOST, sshClient);
+            ConfigWindow w = new ConfigWindow(HOST);
             w.Show();
         }
     }
