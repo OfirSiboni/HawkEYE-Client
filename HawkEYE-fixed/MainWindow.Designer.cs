@@ -321,6 +321,7 @@ namespace Hawk_Client {
             this.GRIPpushButton.Text = "Push";
             this.GRIPpushButton.UseVisualStyleBackColor = false;
             this.GRIPpushButton.Visible = false;
+            this.GRIPpushButton.Click += new System.EventHandler(this.ScriptPushButton_Click);
             // 
             // ScriptPushButton
             // 
@@ -334,6 +335,7 @@ namespace Hawk_Client {
             this.ScriptPushButton.TabIndex = 7;
             this.ScriptPushButton.Text = "Push";
             this.ScriptPushButton.UseVisualStyleBackColor = false;
+            this.ScriptPushButton.Click += new System.EventHandler(this.ScriptPushButton_Click);
             // 
             // GRIPdeleteButton
             // 

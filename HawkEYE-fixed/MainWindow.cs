@@ -4,6 +4,7 @@ using HawkEYE_fixed;
 using Renci.SshNet;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Hawk_Client {
@@ -136,6 +137,32 @@ namespace Hawk_Client {
             if(mainBrowser != null) {
                 mainBrowser.Refresh();
             }
+        }
+
+        private void ScriptPushButton_Click(object sender, EventArgs e) {
+            string buttonType = "scripts"; //can be "scripts" or "grip", depend on the button
+            if (sender == GRIPpushButton) buttonType = "grips";
+            if (!sshClient.IsConnected) { showError("You are not connected!", "invalid Action"); return; }
+            var fileContent = string.Empty;
+            var filePath = string.Empty;
+
+            using (OpenFileDialog openFileDialog = new OpenFileDialog()) {
+                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); //default path is desktop
+                openFileDialog.Filter = "Python files (*.py)|*.py|All files (*.*)|*.*";
+                openFileDialog.FilterIndex = 1;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK) {
+                    //Read the contents of the file into a stream
+                    var fileStream = openFileDialog.OpenFile();
+                    using (StreamReader reader = new StreamReader(fileStream)) {
+                        fileContent = reader.ReadToEnd();
+                    }
+                    sshClient.RunCommand("echo " + fileContent + " > " + "~/.hawk/"+ buttonType +"/" + openFileDialog.SafeFileName);
+                }
+
+            }
+
         }
 
         private void Button1_Click(object sender, EventArgs e) {
