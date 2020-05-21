@@ -25,6 +25,7 @@ namespace Hawk_Client {
         public MainWindow() {
             InitializeComponent();
             CefSettings settings = new CefSettings();
+            settings.BrowserSubprocessPath = @"x86\CefSharp.BrowserSubprocess.exe";
             // Initialize cef with the provided settings
             Cef.Initialize(settings);
             this.scriptSelect.SelectedItem = "Default";

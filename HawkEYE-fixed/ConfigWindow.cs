@@ -78,7 +78,7 @@ namespace HawkEYE_fixed {
             this.Close();
         }
         public void changed_values(string variable) {
-            byte[] msg = System.Text.Encoding.ASCII.GetBytes(variable);
+            byte[] msg = System.Text.Encoding.UTF8.GetBytes(variable);
             sock.SendTo(msg, ep);
             /** Add ONLY if There is no other way to send False Values
             foreach (string s in names)
@@ -98,6 +98,7 @@ namespace HawkEYE_fixed {
         byte[] nullMsg = System.Text.Encoding.ASCII.GetBytes("null");
         public void sendNull() {
             while(true)
+            Thread.Sleep(512);
             sock.SendTo(nullMsg, ep);
         }
 
