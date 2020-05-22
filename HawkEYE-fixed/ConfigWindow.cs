@@ -19,6 +19,7 @@ namespace HawkEYE_fixed {
             broadcast = IPAddress.Parse(Address);
             ep = new IPEndPoint(broadcast, 5000);
             address = Address;
+            sock.SendTo(System.Text.Encoding.ASCII.GetBytes("START"), ep);
             Thread noneThread = new Thread(sendNull);
             noneThread.Start();
         }
