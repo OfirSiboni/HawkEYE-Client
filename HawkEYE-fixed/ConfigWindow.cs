@@ -68,9 +68,6 @@ namespace HawkEYE_fixed {
         private void setConf_click(object sender, EventArgs e) {
             changed_values("SET_CONF");
         }
-
-
-
         private void addPt_click(object sender, EventArgs e) {
             changed_values("ADD_PT");
         }
@@ -81,13 +78,6 @@ namespace HawkEYE_fixed {
         public void changed_values(string variable) {
             byte[] msg = System.Text.Encoding.UTF8.GetBytes(variable);
             sock.SendTo(msg, ep);
-            /** Add ONLY if There is no other way to send False Values
-            foreach (string s in names)
-                if (s != variable){
-                    byte[] secMsg = System.Text.Encoding.ASCII.GetBytes(s);
-                    stream.Write(secMsg, 0, secMsg.Length);
-                }
-            **/
         }
         public string boolToString(bool str) {
             if (str.ToString()[0] == 'f') return "False";
@@ -98,9 +88,10 @@ namespace HawkEYE_fixed {
         }
         byte[] nullMsg = System.Text.Encoding.ASCII.GetBytes("null");
         public void sendNull() {
-            while(true)
-            Thread.Sleep(512);
-            sock.SendTo(nullMsg, ep);
+            while(true){
+                Thread.Sleep(512);
+                sock.SendTo(nullMsg, ep);
+            }
         }
 
 

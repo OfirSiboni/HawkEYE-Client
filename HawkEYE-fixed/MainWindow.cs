@@ -187,10 +187,6 @@ namespace Hawk_Client {
             sshClient.RunCommand("rm ~/.hawk/scripts/" + ((ComboBox)sender).Text);
         }
 
-        private void scriptLoader_SelectedIndexChanged(object sender, EventArgs e) {
-
-        }
-
         private void GRIPdeleteButton_Click(object sender, EventArgs e) {
             if (!sshClient.IsConnected) { showError("You are not connected!", "invalid Action"); return; }
             sshClient.RunCommand("rm ~/.hawk/grips/" + ((ComboBox)sender).Text);
@@ -200,6 +196,23 @@ namespace Hawk_Client {
             if (!sshClient.IsConnected) { showError("You are not connected!", "invalid Action"); return; }
             ConfigWindow w = new ConfigWindow(HOST);
             w.Show();
+        }
+
+        private void ValuesRefresh_Click(object sender, EventArgs e) {
+            if (!sshClient.IsConnected) { showError("You are not connected!", "invalid Action"); return; }
+            if (MessageBox.Show("NOTE: refreshing the values will make you recalculate them, this is an automatic process that make your mechine more accurate, Do you want to continue?"
+            , "Warning", MessageBoxButtons.OKCancel) == DialogResult.Cancel) return;
+            sshClient.RunCommand("cd /root/HawkEye/source"); //can be bad
+            string result = sshClient.RunCommand("ptyhon3 -c 'import MLprocess; getVals()'").Result;
+            double[] vals = Array.ConvertAll(result.Split(','), Double.Parse);
+
+            Hmin.Text = vals[0].ToString();
+            Hmax.Text = vals[1].ToString();
+            Smin.Text = vals[2].ToString();
+            Smax.Text = vals[3].ToString();
+            Vmin.Text = vals[4].ToString();
+            Vmax.Text = vals[5].ToString();
+
         }
 
         private void updateFileManager() {

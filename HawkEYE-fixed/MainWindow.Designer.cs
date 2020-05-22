@@ -60,6 +60,7 @@ namespace Hawk_Client {
             this.MLenable = new System.Windows.Forms.CheckBox();
             this.scriptSelect = new System.Windows.Forms.ComboBox();
             this.ML = new System.Windows.Forms.TabPage();
+            this.ValuesRefresh = new System.Windows.Forms.Button();
             this.HSVtable = new System.Windows.Forms.GroupBox();
             this.Vmax = new System.Windows.Forms.Label();
             this.Vmin = new System.Windows.Forms.Label();
@@ -387,7 +388,6 @@ namespace Hawk_Client {
             this.scriptLoader.Name = "scriptLoader";
             this.scriptLoader.Size = new System.Drawing.Size(156, 21);
             this.scriptLoader.TabIndex = 6;
-            this.scriptLoader.SelectedIndexChanged += new System.EventHandler(this.scriptLoader_SelectedIndexChanged);
             // 
             // SaveButton
             // 
@@ -484,6 +484,7 @@ namespace Hawk_Client {
             // ML
             // 
             this.ML.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(89)))), ((int)(((byte)(89)))), ((int)(((byte)(89)))));
+            this.ML.Controls.Add(this.ValuesRefresh);
             this.ML.Controls.Add(this.HSVtable);
             this.ML.Controls.Add(this.startConfigButton);
             this.ML.Location = new System.Drawing.Point(4, 22);
@@ -491,6 +492,20 @@ namespace Hawk_Client {
             this.ML.Size = new System.Drawing.Size(786, 475);
             this.ML.TabIndex = 2;
             this.ML.Text = "ML";
+            // 
+            // ValuesRefresh
+            // 
+            this.ValuesRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(115)))), ((int)(((byte)(112)))));
+            this.ValuesRefresh.FlatAppearance.BorderSize = 0;
+            this.ValuesRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ValuesRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.ValuesRefresh.Location = new System.Drawing.Point(64, 45);
+            this.ValuesRefresh.Name = "ValuesRefresh";
+            this.ValuesRefresh.Size = new System.Drawing.Size(75, 23);
+            this.ValuesRefresh.TabIndex = 8;
+            this.ValuesRefresh.Text = "Refresh";
+            this.ValuesRefresh.UseVisualStyleBackColor = false;
+            this.ValuesRefresh.Click += new System.EventHandler(this.ValuesRefresh_Click);
             // 
             // HSVtable
             // 
@@ -743,5 +758,6 @@ namespace Hawk_Client {
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label Hlabel;
         private Button Refresh;
+        private Button ValuesRefresh;
     }
 }
