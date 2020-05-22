@@ -158,6 +158,7 @@ namespace Hawk_Client {
             this.reboot.TabIndex = 3;
             this.reboot.Text = "reboot";
             this.reboot.UseVisualStyleBackColor = false;
+            this.reboot.Click += new System.EventHandler(this.Reboot);
             // 
             // restart
             // 
@@ -183,6 +184,7 @@ namespace Hawk_Client {
             this.changeDNS.TabIndex = 2;
             this.changeDNS.Text = "Set DNS";
             this.changeDNS.UseVisualStyleBackColor = false;
+            this.changeDNS.Click += new System.EventHandler(this.setDNS_Click);
             // 
             // SetIP
             // 
@@ -221,6 +223,7 @@ namespace Hawk_Client {
             this.setDHCP.TabIndex = 1;
             this.setDHCP.Text = "set DHCP";
             this.setDHCP.UseVisualStyleBackColor = false;
+            this.setDHCP.Click += new System.EventHandler(this.setDHCP_Click);
             // 
             // setPass2
             // 
@@ -350,6 +353,7 @@ namespace Hawk_Client {
             this.GRIPdeleteButton.Text = "Delete";
             this.GRIPdeleteButton.UseVisualStyleBackColor = false;
             this.GRIPdeleteButton.Visible = false;
+            this.GRIPdeleteButton.Click += new System.EventHandler(this.GRIPdeleteButton_Click);
             // 
             // GRIPloader
             // 
@@ -373,6 +377,7 @@ namespace Hawk_Client {
             this.ScriptDeleteButton.TabIndex = 7;
             this.ScriptDeleteButton.Text = "Delete";
             this.ScriptDeleteButton.UseVisualStyleBackColor = false;
+            this.ScriptDeleteButton.Click += new System.EventHandler(this.ScriptDeleteButton_Click);
             // 
             // scriptLoader
             // 
@@ -382,6 +387,7 @@ namespace Hawk_Client {
             this.scriptLoader.Name = "scriptLoader";
             this.scriptLoader.Size = new System.Drawing.Size(156, 21);
             this.scriptLoader.TabIndex = 6;
+            this.scriptLoader.SelectedIndexChanged += new System.EventHandler(this.scriptLoader_SelectedIndexChanged);
             // 
             // SaveButton
             // 
@@ -395,6 +401,7 @@ namespace Hawk_Client {
             this.SaveButton.TabIndex = 5;
             this.SaveButton.Text = "save";
             this.SaveButton.UseVisualStyleBackColor = false;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // FPSbox
             // 

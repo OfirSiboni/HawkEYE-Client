@@ -120,7 +120,10 @@ namespace Hawk_Client {
             sshClient.CreateCommand("python3 ~/HawkEYE/source/main.py");
             showError("HawkEYE restart successfull", "success");
         }
-
+        private void Reboot(object sender, EventArgs e) {
+            if (!sshClient.IsConnected) { showError("You are not connected!", "invalid action"); return; }
+            sshClient.RunCommand("reboot");
+        }
 
         #endregion
 
@@ -131,6 +134,7 @@ namespace Hawk_Client {
             this.GRIPloader.Visible = ok;
             this.GRIPpushButton.Visible = ok;
             this.GRIPdeleteButton.Visible = ok;
+            if (ok) sshClient.RunCommand("python3 ~/HawkEye/source/MLprocess.py");
         }
 
         private void Refresh_Click(object sender, EventArgs e) {
@@ -165,10 +169,45 @@ namespace Hawk_Client {
 
         }
 
+        private void SaveButton_Click(object sender, EventArgs e) {
+            if (!sshClient.IsConnected) { showError("You are not connected!", "invalid Action"); return; }
+            string scriptfile = scriptLoader.Text;
+            string gripfile = GRIPloader.Text;
+            string pipe = "vision";
+            string teamnumber = TeamNumberBox.Text; if (teamnumber.Length < 2) showError("Insert team number!", "Invalid action");
+            string width = WidthBox.Text; if (width.Length < 2) width = "160";
+            string height = HeightBox.Text; if (height.Length < 2) height = "120";
+            string fps = FPSbox.Text; if (fps.Length < 2) fps = "30";
+            string json = $"{{'grip_file':{gripfile},'script_file':{scriptfile},'pipe_name':{pipe},'team_number':{teamnumber},'width':{width},'height':{height},'fps':{fps}}}";
+            sshClient.RunCommand($"echo '{json}' > ~/.hawk/config.json");
+        }
+
+        private void ScriptDeleteButton_Click(object sender, EventArgs e) {
+            if (!sshClient.IsConnected) { showError("You are not connected!", "invalid Action"); return; }
+            sshClient.RunCommand("rm ~/.hawk/scripts/" + ((ComboBox)sender).Text);
+        }
+
+        private void scriptLoader_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
+
+        private void GRIPdeleteButton_Click(object sender, EventArgs e) {
+            if (!sshClient.IsConnected) { showError("You are not connected!", "invalid Action"); return; }
+            sshClient.RunCommand("rm ~/.hawk/grips/" + ((ComboBox)sender).Text);
+        }
+
         private void Button1_Click(object sender, EventArgs e) {
             if (!sshClient.IsConnected) { showError("You are not connected!", "invalid Action"); return; }
             ConfigWindow w = new ConfigWindow(HOST);
             w.Show();
+        }
+
+        private void updateFileManager() {
+            string scripts = sshClient.RunCommand("ls ~/.hawk/scripts").Result;
+            string grips = sshClient.RunCommand("ls ~/.hawk/grips").Result;
+            scriptSelect.Items.AddRange(scripts.Split(' '));
+            GRIPselect.Items.AddRange(grips.Split(' '));
+
         }
     }
 }
