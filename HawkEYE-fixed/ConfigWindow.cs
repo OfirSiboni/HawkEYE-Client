@@ -19,7 +19,7 @@ namespace HawkEYE_fixed {
             broadcast = IPAddress.Parse(Address);
             ep = new IPEndPoint(broadcast, 5000);
             address = Address;
-            sock.SendTo(System.Text.Encoding.ASCII.GetBytes("START"), ep);
+            sock.SendTo(System.Text.Encoding.UTF8.GetBytes("START"), ep);
             Thread noneThread = new Thread(sendNull);
             noneThread.Start();
         }
@@ -78,6 +78,7 @@ namespace HawkEYE_fixed {
         public void changed_values(string variable) {
             byte[] msg = System.Text.Encoding.UTF8.GetBytes(variable);
             sock.SendTo(msg, ep);
+            this.label2.Text += $"\n{variable}";
         }
         public string boolToString(bool str) {
             if (str.ToString()[0] == 'f') return "False";
@@ -86,11 +87,12 @@ namespace HawkEYE_fixed {
         public bool ischanged() {
             return get_prev_value() || get_next_value() || get_set_conf_value() || get_add_pt_value() || get_done_value();
         }
-        byte[] nullMsg = System.Text.Encoding.ASCII.GetBytes("null");
+        byte[] nullMsg = System.Text.Encoding.UTF8.GetBytes("null");
         public void sendNull() {
             while(true){
                 Thread.Sleep(512);
                 sock.SendTo(nullMsg, ep);
+
             }
         }
 

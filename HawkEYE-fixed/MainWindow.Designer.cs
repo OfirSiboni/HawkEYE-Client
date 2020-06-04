@@ -27,6 +27,7 @@ namespace Hawk_Client {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.ConnectAddress = new System.Windows.Forms.TextBox();
             this.password = new System.Windows.Forms.TextBox();
             this.ConnectButton = new System.Windows.Forms.Button();
@@ -690,6 +691,7 @@ namespace Hawk_Client {
             this.Controls.Add(this.password);
             this.Controls.Add(this.ConnectAddress);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;

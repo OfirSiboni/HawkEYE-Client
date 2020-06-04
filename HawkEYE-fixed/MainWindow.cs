@@ -6,6 +6,8 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Threading;
+
 
 namespace Hawk_Client {
     public partial class MainWindow : Form {
@@ -31,15 +33,17 @@ namespace Hawk_Client {
             Cef.Initialize(settings);
             this.scriptSelect.SelectedItem = "Default";
             string path = AppDomain.CurrentDomain.BaseDirectory;
+            Thread checkConnection = new Thread(checkConnectionThread);
         }
         #region Control Tab methods
         private void Connect_Click(object sender, EventArgs e) {
-
+            if (sshClient.IsConnected) sshClient.Disconnect();
             int index = this.ConnectAddress.Text.IndexOf("@");
             String address = this.ConnectAddress.Text;
-            if (index > 0) {
-                USER = address.Substring(0, index);
-                HOST = address.Substring(index + 1);
+            if (index > 0 || address == "default") {
+                if (address == "default") { USER = "root"; HOST = "192.168.1.6"; } //make your life easier
+                else{USER = address.Substring(0, index);
+                HOST = address.Substring(index + 1); }
                 PASSWORD = this.password.Text;
                 try {
                     sshClient = new SshClient(HOST, 22, USER, PASSWORD); //default port = 22
@@ -57,8 +61,8 @@ namespace Hawk_Client {
                 else{ this.ConnectButton.BackColor = FalseColor; return; };
 
                 // Create a browser component
-                mainBrowser = new ChromiumWebBrowser("http://"+HOST+":1191/stream.mjpg");
-                CameraBrowser = new ChromiumWebBrowser("http://" + HOST + ":1191");
+                mainBrowser = new ChromiumWebBrowser("http://"+HOST+":1181/stream.mjpg");
+                CameraBrowser = new ChromiumWebBrowser("http://" + HOST + ":1181");
                 mainBrowser.Location = new Point(893, 79);
                 mainBrowser.Size = new Size(640, 480);
                 mainBrowser.Dock = DockStyle.None;
@@ -161,8 +165,10 @@ namespace Hawk_Client {
                     var fileStream = openFileDialog.OpenFile();
                     using (StreamReader reader = new StreamReader(fileStream)) {
                         fileContent = reader.ReadToEnd();
+                        scriptLoader.Items.Add(openFileDialog.FileName);
                     }
                     sshClient.RunCommand("echo " + fileContent + " > " + "~/.hawk/"+ buttonType +"/" + openFileDialog.SafeFileName);
+                    
                 }
 
             }
@@ -171,7 +177,7 @@ namespace Hawk_Client {
 
         private void SaveButton_Click(object sender, EventArgs e) {
             if (!sshClient.IsConnected) { showError("You are not connected!", "invalid Action"); return; }
-            string scriptfile = scriptLoader.Text;
+            string scriptfile = scriptLoader.Text; if (scriptfile == "Default") scriptfile = "processor.py";
             string gripfile = GRIPloader.Text;
             string pipe = "vision";
             string teamnumber = TeamNumberBox.Text; if (teamnumber.Length < 2) showError("Insert team number!", "Invalid action");
@@ -180,16 +186,19 @@ namespace Hawk_Client {
             string fps = FPSbox.Text; if (fps.Length < 2) fps = "30";
             string json = $"{{'grip_file':{gripfile},'script_file':{scriptfile},'pipe_name':{pipe},'team_number':{teamnumber},'width':{width},'height':{height},'fps':{fps}}}";
             sshClient.RunCommand($"echo '{json}' > ~/.hawk/config.json");
+            updateFileManager();
         }
 
         private void ScriptDeleteButton_Click(object sender, EventArgs e) {
             if (!sshClient.IsConnected) { showError("You are not connected!", "invalid Action"); return; }
             sshClient.RunCommand("rm ~/.hawk/scripts/" + ((ComboBox)sender).Text);
+            updateFileManager();
         }
 
         private void GRIPdeleteButton_Click(object sender, EventArgs e) {
             if (!sshClient.IsConnected) { showError("You are not connected!", "invalid Action"); return; }
             sshClient.RunCommand("rm ~/.hawk/grips/" + ((ComboBox)sender).Text);
+            updateFileManager();
         }
 
         private void Button1_Click(object sender, EventArgs e) {
@@ -199,17 +208,24 @@ namespace Hawk_Client {
         }
 
         private void ValuesRefresh_Click(object sender, EventArgs e) {
-            if (!sshClient.IsConnected) { showError("You are not connected!", "invalid Action"); return; }
+            if (!sshClient.IsConnected) { showError("You are not connected!", "invalid Action"); return; }     
             if (MessageBox.Show("NOTE: refreshing the values will make you recalculate them, this is an automatic process that make your mechine more accurate, Do you want to continue?"
             , "Warning", MessageBoxButtons.OKCancel) == DialogResult.Cancel) return;
-            sshClient.RunCommand("cd /root/HawkEye/source"); //can be bad
-            string result = sshClient.RunCommand("ptyhon3 -c 'import MLprocess; getVals()'").Result;
-            double[] vals = Array.ConvertAll(result.Split(','), Double.Parse);
+
+            string path = @" ""/root/HawkEye/source"" ";
+            var cmd = sshClient.RunCommand("python3 -c 'import os; os.chdir(" + path + "); import MLprocess;'");
+            string res = cmd.Result;
+            
+            res = res.Substring(1,res.Length-3); // remove '[' and ']' for formatting
+            MessageBox.Show(res);
+            double[] vals = Array.ConvertAll(res.Split(','), Double.Parse);
 
             Hmin.Text = vals[0].ToString();
             Hmax.Text = vals[1].ToString();
+
             Smin.Text = vals[2].ToString();
             Smax.Text = vals[3].ToString();
+
             Vmin.Text = vals[4].ToString();
             Vmax.Text = vals[5].ToString();
 
@@ -221,6 +237,12 @@ namespace Hawk_Client {
             scriptSelect.Items.AddRange(scripts.Split(' '));
             GRIPselect.Items.AddRange(grips.Split(' '));
 
+        }
+
+
+        public void checkConnectionThread() {
+            while(true)
+            if (!sshClient.IsConnected) this.ConnectButton.BackColor = FalseColor;
         }
     }
 }
