@@ -25,3 +25,11 @@
 [0529/031943.048:WARNING:dns_config_service_win.cc(672)] Failed to read DnsConfig.
 [0529/031943.061:WARNING:dns_config_service_win.cc(672)] Failed to read DnsConfig.
 [0529/104429.856:WARNING:dns_config_service_win.cc(672)] Failed to read DnsConfig.
+[0608/205603.349:WARNING:dns_config_service_win.cc(672)] Failed to read DnsConfig.
+[0608/205603.589:WARNING:dns_config_service_win.cc(672)] Failed to read DnsConfig.
+[0608/234518.090:WARNING:dns_config_service_win.cc(672)] Failed to read DnsConfig.
+[0608/234518.360:WARNING:dns_config_service_win.cc(672)] Failed to read DnsConfig.
+[0608/234950.046:WARNING:dns_config_service_win.cc(672)] Failed to read DnsConfig.
+[0608/235008.224:WARNING:gpu_process_host.cc(1213)] The GPU process has crashed 1 time(s)
+[0609/180720.585:WARNING:dns_config_service_win.cc(672)] Failed to read DnsConfig.
+[0609/180720.699:WARNING:dns_config_service_win.cc(672)] Failed to read DnsConfig.

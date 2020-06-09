@@ -133,12 +133,12 @@ namespace Hawk_Client {
 
         private void CheckBox1_CheckedChanged(object sender, EventArgs e) {
             bool ok = !this.MLenable.Checked;
-            this.GRIPselect.Visible = ok;
+            this.GRIPselecter.Visible = ok;
             this.gripLabel.Visible = ok;
-            this.GRIPloader.Visible = ok;
+            this.GRIPload.Visible = ok;
             this.GRIPpushButton.Visible = ok;
             this.GRIPdeleteButton.Visible = ok;
-            if (ok) sshClient.RunCommand("python3 ~/HawkEye/source/MLprocess.py");
+            //if (ok) sshClient.RunCommand("python3 ~/HawkEye/source/MLprocess.py");
         }
 
         private void Refresh_Click(object sender, EventArgs e) {
@@ -165,11 +165,14 @@ namespace Hawk_Client {
                     var fileStream = openFileDialog.OpenFile();
                     using (StreamReader reader = new StreamReader(fileStream)) {
                         fileContent = reader.ReadToEnd();
-                        scriptLoader.Items.Add(openFileDialog.FileName);
+                        ComboBox selecter = buttonType == "scripts" ? scriptSelect : GRIPselecter;
+                        selecter.Items.Add(System.IO.Path.GetFileName(openFileDialog.FileName));
                     }
                     sshClient.RunCommand("echo " + fileContent + " > " + "~/.hawk/"+ buttonType +"/" + openFileDialog.SafeFileName);
-                    
+
+
                 }
+
 
             }
 
@@ -177,14 +180,16 @@ namespace Hawk_Client {
 
         private void SaveButton_Click(object sender, EventArgs e) {
             if (!sshClient.IsConnected) { showError("You are not connected!", "invalid Action"); return; }
-            string scriptfile = scriptLoader.Text; if (scriptfile == "Default") scriptfile = "processor.py";
-            string gripfile = GRIPloader.Text;
+            string scriptfile = scriptSelect.SelectedItem.ToString(); if (scriptfile == "Default") scriptfile = "processor.py";
+            string gripfile = GRIPselecter.SelectedItem.ToString();
             string pipe = "vision";
-            string teamnumber = TeamNumberBox.Text; if (teamnumber.Length < 2) showError("Insert team number!", "Invalid action");
-            string width = WidthBox.Text; if (width.Length < 2) width = "160";
-            string height = HeightBox.Text; if (height.Length < 2) height = "120";
-            string fps = FPSbox.Text; if (fps.Length < 2) fps = "30";
-            string json = $"{{'grip_file':{gripfile},'script_file':{scriptfile},'pipe_name':{pipe},'team_number':{teamnumber},'width':{width},'height':{height},'fps':{fps}}}";
+            string teamnumber = TeamNumberBox.Text; if (teamnumber == "Team Number"){ showError("Insert team number!", "Invalid action");return; }
+            string width = WidthBox.Text; if (width == "Width : 120") width = "160";
+            string height = HeightBox.Text; if (height == "Height : 160" ) height = "120";
+            string fps = FPSbox.Text; if (fps == "FPS-(Frame Per Second) : 30") fps = "30";
+            string json = $"{{^grip_file^:#{gripfile}#,^script_file^:#{scriptfile}#,^pipe_name^:#{pipe}#,^team_number^:#{teamnumber}#,^width^:#{width}',^height^:#{height}#,^fps^:#{fps}#}}";
+            char c = "'"[0];
+            json = json.Replace('^','"').Replace('#',c);
             sshClient.RunCommand($"echo '{json}' > ~/.hawk/config.json");
             updateFileManager();
         }
@@ -235,7 +240,7 @@ namespace Hawk_Client {
             string scripts = sshClient.RunCommand("ls ~/.hawk/scripts").Result;
             string grips = sshClient.RunCommand("ls ~/.hawk/grips").Result;
             scriptSelect.Items.AddRange(scripts.Split(' '));
-            GRIPselect.Items.AddRange(grips.Split(' '));
+            GRIPselecter.Items.AddRange(grips.Split(' '));
 
         }
 

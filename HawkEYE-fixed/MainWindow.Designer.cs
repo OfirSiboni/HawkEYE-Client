@@ -49,7 +49,7 @@ namespace Hawk_Client {
             this.GRIPpushButton = new System.Windows.Forms.Button();
             this.ScriptPushButton = new System.Windows.Forms.Button();
             this.GRIPdeleteButton = new System.Windows.Forms.Button();
-            this.GRIPloader = new System.Windows.Forms.ComboBox();
+            this.GRIPselecter = new System.Windows.Forms.ComboBox();
             this.ScriptDeleteButton = new System.Windows.Forms.Button();
             this.scriptLoader = new System.Windows.Forms.ComboBox();
             this.SaveButton = new System.Windows.Forms.Button();
@@ -57,7 +57,7 @@ namespace Hawk_Client {
             this.WidthBox = new System.Windows.Forms.TextBox();
             this.HeightBox = new System.Windows.Forms.TextBox();
             this.TeamNumberBox = new System.Windows.Forms.TextBox();
-            this.GRIPselect = new System.Windows.Forms.ComboBox();
+            this.GRIPload = new System.Windows.Forms.ComboBox();
             this.MLenable = new System.Windows.Forms.CheckBox();
             this.scriptSelect = new System.Windows.Forms.ComboBox();
             this.ML = new System.Windows.Forms.TabPage();
@@ -271,7 +271,7 @@ namespace Hawk_Client {
             this.Settings.Controls.Add(this.GRIPpushButton);
             this.Settings.Controls.Add(this.ScriptPushButton);
             this.Settings.Controls.Add(this.GRIPdeleteButton);
-            this.Settings.Controls.Add(this.GRIPloader);
+            this.Settings.Controls.Add(this.GRIPselecter);
             this.Settings.Controls.Add(this.ScriptDeleteButton);
             this.Settings.Controls.Add(this.scriptLoader);
             this.Settings.Controls.Add(this.SaveButton);
@@ -279,7 +279,7 @@ namespace Hawk_Client {
             this.Settings.Controls.Add(this.WidthBox);
             this.Settings.Controls.Add(this.HeightBox);
             this.Settings.Controls.Add(this.TeamNumberBox);
-            this.Settings.Controls.Add(this.GRIPselect);
+            this.Settings.Controls.Add(this.GRIPload);
             this.Settings.Controls.Add(this.MLenable);
             this.Settings.Controls.Add(this.scriptSelect);
             this.Settings.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(250)));
@@ -357,15 +357,16 @@ namespace Hawk_Client {
             this.GRIPdeleteButton.Visible = false;
             this.GRIPdeleteButton.Click += new System.EventHandler(this.GRIPdeleteButton_Click);
             // 
-            // GRIPloader
+            // GRIPselecter
             // 
-            this.GRIPloader.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.GRIPloader.FormattingEnabled = true;
-            this.GRIPloader.Location = new System.Drawing.Point(565, 73);
-            this.GRIPloader.Name = "GRIPloader";
-            this.GRIPloader.Size = new System.Drawing.Size(156, 21);
-            this.GRIPloader.TabIndex = 6;
-            this.GRIPloader.Visible = false;
+            this.GRIPselecter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.GRIPselecter.FormattingEnabled = true;
+            this.GRIPselecter.Location = new System.Drawing.Point(112, 69);
+            this.GRIPselecter.Name = "GRIPselecter";
+            this.GRIPselecter.Size = new System.Drawing.Size(121, 21);
+            this.GRIPselecter.TabIndex = 3;
+            this.GRIPselecter.Text = "GRIP file";
+            this.GRIPselecter.Visible = false;
             // 
             // ScriptDeleteButton
             // 
@@ -444,16 +445,15 @@ namespace Hawk_Client {
             this.TeamNumberBox.Text = "Team Number";
             this.TeamNumberBox.Click += new System.EventHandler(this.cancelHint);
             // 
-            // GRIPselect
+            // GRIPload
             // 
-            this.GRIPselect.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.GRIPselect.FormattingEnabled = true;
-            this.GRIPselect.Location = new System.Drawing.Point(112, 69);
-            this.GRIPselect.Name = "GRIPselect";
-            this.GRIPselect.Size = new System.Drawing.Size(121, 21);
-            this.GRIPselect.TabIndex = 3;
-            this.GRIPselect.Text = "GRIP file";
-            this.GRIPselect.Visible = false;
+            this.GRIPload.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.GRIPload.FormattingEnabled = true;
+            this.GRIPload.Location = new System.Drawing.Point(565, 73);
+            this.GRIPload.Name = "GRIPload";
+            this.GRIPload.Size = new System.Drawing.Size(156, 21);
+            this.GRIPload.TabIndex = 6;
+            this.GRIPload.Visible = false;
             // 
             // MLenable
             // 
@@ -496,15 +496,14 @@ namespace Hawk_Client {
             // 
             // ValuesRefresh
             // 
-            this.ValuesRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(115)))), ((int)(((byte)(112)))));
-            this.ValuesRefresh.FlatAppearance.BorderSize = 0;
+            this.ValuesRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(188)))), ((int)(((byte)(191)))));
             this.ValuesRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ValuesRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.ValuesRefresh.Location = new System.Drawing.Point(64, 45);
+            this.ValuesRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.ValuesRefresh.Location = new System.Drawing.Point(450, 170);
             this.ValuesRefresh.Name = "ValuesRefresh";
-            this.ValuesRefresh.Size = new System.Drawing.Size(75, 23);
-            this.ValuesRefresh.TabIndex = 8;
-            this.ValuesRefresh.Text = "Refresh";
+            this.ValuesRefresh.Size = new System.Drawing.Size(254, 46);
+            this.ValuesRefresh.TabIndex = 9;
+            this.ValuesRefresh.Text = "Refresh and Recalculate";
             this.ValuesRefresh.UseVisualStyleBackColor = false;
             this.ValuesRefresh.Click += new System.EventHandler(this.ValuesRefresh_Click);
             // 
@@ -648,7 +647,7 @@ namespace Hawk_Client {
             this.startConfigButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(188)))), ((int)(((byte)(191)))));
             this.startConfigButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.startConfigButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.startConfigButton.Location = new System.Drawing.Point(450, 164);
+            this.startConfigButton.Location = new System.Drawing.Point(450, 114);
             this.startConfigButton.Name = "startConfigButton";
             this.startConfigButton.Size = new System.Drawing.Size(254, 46);
             this.startConfigButton.TabIndex = 0;
@@ -729,7 +728,7 @@ namespace Hawk_Client {
         private System.Windows.Forms.Button restart;
         private System.Windows.Forms.ComboBox scriptSelect;
         private System.Windows.Forms.CheckBox MLenable;
-        private System.Windows.Forms.ComboBox GRIPselect;
+        private System.Windows.Forms.ComboBox GRIPselecter;
         private System.Windows.Forms.TextBox HeightBox;
         private System.Windows.Forms.TextBox TeamNumberBox;
         private System.Windows.Forms.TextBox WidthBox;
@@ -738,7 +737,7 @@ namespace Hawk_Client {
         private System.Windows.Forms.Button GRIPpushButton;
         private System.Windows.Forms.Button ScriptPushButton;
         private System.Windows.Forms.Button GRIPdeleteButton;
-        private System.Windows.Forms.ComboBox GRIPloader;
+        private System.Windows.Forms.ComboBox GRIPload;
         private System.Windows.Forms.Button ScriptDeleteButton;
         private System.Windows.Forms.ComboBox scriptLoader;
         private System.Windows.Forms.Label gripLabel;
