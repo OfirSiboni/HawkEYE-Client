@@ -120,8 +120,8 @@ namespace Hawk_Client {
 
         private void Restart_Click(object sender, EventArgs e) {
             if (!sshClient.IsConnected) { showError("You are not connected!", "invalid action"); return; }
-            sshClient.CreateCommand("pkill -9 python3");
-            sshClient.CreateCommand("python3 ~/HawkEYE/source/main.py");
+            sshClient.RunCommand("pkill -9 python3");
+            sshClient.RunCommand("python3 /root/HawkEYE/source/main.py");
             showError("HawkEYE restart successfull", "success");
         }
         private void Reboot(object sender, EventArgs e) {
@@ -187,7 +187,8 @@ namespace Hawk_Client {
             string width = WidthBox.Text; if (width == "Width : 120") width = "160";
             string height = HeightBox.Text; if (height == "Height : 160" ) height = "120";
             string fps = FPSbox.Text; if (fps == "FPS-(Frame Per Second) : 30") fps = "30";
-            string json = $"{{^grip_file^:#{gripfile}#,^script_file^:#{scriptfile}#,^pipe_name^:#{pipe}#,^team_number^:#{teamnumber}#,^width^:#{width}',^height^:#{height}#,^fps^:#{fps}#}}";
+            string json = $"{{^grip_file^: \"{gripfile}\",^script_file^: \"{scriptfile}\",^pipe_name^:\"{pipe}\",^team_number^:#{teamnumber}#,^width^:#{width}',^height^:#{height}#,^fps^:#{fps}#}}";
+            string js = $"{{^grip_file^: \"{gripfile}\"";
             char c = "'"[0];
             json = json.Replace('^','"').Replace('#',c);
             sshClient.RunCommand($"echo '{json}' > ~/.hawk/config.json");
